@@ -7,12 +7,17 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
 var cursors
 
 function preload() {
-  game.load.image('bg5', 'http://127.0.0.1:8887/assets/bg5.jpg')
+  game.load.image('bg1', 'http://127.0.0.1:8887/assets/bg1.jpg')
+  game.load.image('tropicalfish', 'http://127.0.0.1:8887/assets/tropicalfish.png')
 }
 
 function create() {
-  game.add.image(0, 0, 'bg5')
-  game.world.setBounds(0, 0, 1280, 854)
+  game.add.image(0, 0, 'bg1')
+
+  let tropicalfish1 = game.add.image(500, 300, 'tropicalfish')
+  tropicalfish1.scale.setTo(0.3, 0.3)
+
+  game.world.setBounds(0, 0, 1000, 526)
   cursors = game.input.keyboard.createCursorKeys()
 }
 
