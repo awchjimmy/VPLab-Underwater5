@@ -8,8 +8,8 @@ var cursors
 var tropicalfish1
 
 function preload() {
-  game.load.image('bg1', 'http://127.0.0.1:8887/assets/bg1.jpg')
-  game.load.image('tropicalfish', 'http://127.0.0.1:8887/assets/tropicalfish.png')
+  game.load.image('bg1', '/assets/bg1.jpg')
+  game.load.image('tropicalfish', '/assets/tropicalfish.png')
 }
 
 function create() {
