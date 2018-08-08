@@ -1,52 +1,36 @@
-let production = false
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
+  preload: preload,
+  create: create,
+  update: update,
+  render: render
+});
+var cursors
 
-let canvas = document.querySelector('#c')
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-let ctx = canvas.getContext('2d')
-
-let fps = production ? 60 : 30
-let CAMERA_DELTA = 14
-
-ctx.fillRect(20, 20, 20, 20)
-
-// background image
-let bgurl = 'https://images.wallpaperscraft.com/image/fish_coral_underwater_73114_1600x900.jpg'
-let bg = new Image()
-bg.src = bgurl
-
-// camera
-class Camera {
-    constructor () {
-        this.x = 0
-        this.y = 0
-        this.width = 600
-        this.height = window.innerHeight
-    }
-
-    render() {
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
-        ctx.drawImage(bg, this.x, this.y, this.width, this.height, 0, 0, this.width, this.height)
-    }
+function preload() {
+  game.load.image('bg5', 'http://127.0.0.1:8887/assets/bg5.jpg')
 }
-let camera = new Camera()
-setInterval(() => {camera.render()}, 1000 / fps)
 
-// keyboard
-window.addEventListener('keydown', handleKeyboardInput)
-function handleKeyboardInput (e) {
-    switch (e.keyCode) {
-        case 65: // A: left
-            if(camera.x - CAMERA_DELTA > 0) {
-                camera.x -= CAMERA_DELTA
-            }
-            break
-        case 68: // D: right
-            if(camera.x + CAMERA_DELTA < window.innerWidth - camera.width/2) {
-                camera.x += CAMERA_DELTA
-            }
-            break
-        default:
-            alert(e.keyCode)
-    }
+function create() {
+  game.add.image(0, 0, 'bg5')
+  game.world.setBounds(0, 0, 1280, 854)
+  cursors = game.input.keyboard.createCursorKeys()
+}
+
+function update() {
+  if (cursors.up.isDown) {
+    game.camera.y -= 4
+  }
+  else if (cursors.down.isDown) {
+    game.camera.y += 4
+  }
+  if (cursors.left.isDown) {
+    game.camera.x -= 4
+  }
+  else if (cursors.right.isDown) {
+    game.camera.x += 4
+  }
+}
+
+function render() {
+  game.debug.cameraInfo(game.camera, 32, 32);
 }
