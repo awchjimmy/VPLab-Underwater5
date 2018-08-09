@@ -6,6 +6,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
 });
 var cursors
 var tropicalfish1
+var fishCollection = []
 
 function preload() {
   game.load.image('bg1', './assets/bg1.jpg')
@@ -19,13 +20,17 @@ function create() {
   cursors = game.input.keyboard.createCursorKeys()
 
 
-  tropicalfish1 = game.add.sprite(500, 300, 'tropicalfish')
-  tropicalfish1.scale.setTo(0.3, 0.3)
-  game.physics.enable(tropicalfish1, Phaser.Physics.ARCADE);
-  tropicalfish1.body.allowRotation = false
-  tropicalfish1.body.velocity.set(20, 20)
-  tropicalfish1.body.collideWorldBounds = true
 
+  for (let i = 0; i < 3; i++) {
+    tropicalfish1 = game.add.sprite(_.random(800), _.random(600), 'tropicalfish')
+    tropicalfish1.scale.setTo(_.random(0.2, 0.3, true))
+    game.physics.enable(tropicalfish1, Phaser.Physics.ARCADE);
+    tropicalfish1.body.allowRotation = false
+    tropicalfish1.body.velocity.set(20)
+    tropicalfish1.body.collideWorldBounds = true
+
+    fishCollection.push(tropicalfish1)
+  }
 }
 
 function update() {
@@ -49,6 +54,9 @@ function render() {
   game.debug.spriteInfo(tropicalfish1, 32, 192)
 }
 
+// update acceleration every 2 secs
 setInterval(() => {
-  tropicalfish1.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
+  fishCollection.forEach((fish) => {
+    fish.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
+  })
 }, 2000)
