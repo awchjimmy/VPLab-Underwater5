@@ -1,3 +1,6 @@
+var width = 5000
+var height = 600
+
 var game = new Phaser.Game('100%', '100%', Phaser.AUTO, '', {
   preload: preload,
   create: create,
@@ -7,7 +10,7 @@ var game = new Phaser.Game('100%', '100%', Phaser.AUTO, '', {
 var cursors
 
 var fish
-var fishCount = 10
+var fishCount = 50
 var fishCollection = []
 var keyCollection = []
 
@@ -23,14 +26,14 @@ function preload() {
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE)
   game.add.image(0, 0, 'bg1')
-  game.world.setBounds(0, 0, 1000, 526)
+  game.world.setBounds(0, 0, width, height)
   cursors = game.input.keyboard.createCursorKeys()
 
 
 
   for (let i = 0; i < fishCount; i++) {
     let randomKeyname = keyCollection[_.random(keyCollection.length-1)]
-    fish = game.add.sprite(_.random(800), _.random(600), `${randomKeyname}`)
+    fish = game.add.sprite(_.random(width), _.random(height), `${randomKeyname}`)
     fish.scale.setTo(_.random(0.3, 0.5, true))
     game.physics.enable(fish, Phaser.Physics.ARCADE);
     fish.body.allowRotation = false
