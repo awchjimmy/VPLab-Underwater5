@@ -21,14 +21,14 @@ function create() {
 
   tropicalfish1 = game.add.sprite(500, 300, 'tropicalfish')
   tropicalfish1.scale.setTo(0.3, 0.3)
-  tropicalfish1.anchor.setTo(0, 0.5)
   game.physics.enable(tropicalfish1, Phaser.Physics.ARCADE);
   tropicalfish1.body.allowRotation = false
+  tropicalfish1.body.velocity.set(20, 20)
+  tropicalfish1.body.collideWorldBounds = true
 
 }
 
 function update() {
-  game.physics.arcade.moveToXY(tropicalfish1, 100, 100, 60, 1500)
 
   if (cursors.up.isDown) {
     game.camera.y -= 4
@@ -45,6 +45,10 @@ function update() {
 }
 
 function render() {
-  // game.debug.cameraInfo(game.camera, 32, 32)
-  game.debug.spriteInfo(tropicalfish1, 32, 32)
+  game.debug.cameraInfo(game.camera, 32, 32)
+  game.debug.spriteInfo(tropicalfish1, 32, 192)
 }
+
+setInterval(() => {
+  tropicalfish1.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
+}, 2000)
