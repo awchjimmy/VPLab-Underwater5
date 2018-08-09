@@ -17,10 +17,7 @@ var keyCollection = []
 function preload() {
   game.load.image('bg1', './assets/bg1.jpg')
 
-  populateKeyCollection()
-  _.forEach(keyCollection, function (keyname) {
-    game.load.image(`${keyname}`, `./assets/${keyname}.png`)
-  })
+  preloadFishCollection()
 }
 
 function create() {
@@ -29,10 +26,33 @@ function create() {
   game.world.setBounds(0, 0, width, height)
   cursors = game.input.keyboard.createCursorKeys()
 
+  populateFishCollection()
+}
+
+function update() {
+  updateCameraViaKeyboard()
+}
+
+function render() {
+  // game.debug.cameraInfo(game.camera, 32, 32)
+  // game.debug.spriteInfo(fish, 32, 192)
+}
 
 
+function populateKeyCollection() {
+  keyCollection = ['fish001', 'fish002', 'fish003', 'fish004', 'fish005', 'fish006', 'fish007']
+}
+
+function preloadFishCollection() {
+  populateKeyCollection()
+  _.forEach(keyCollection, function (keyname) {
+    game.load.image(`${keyname}`, `./assets/${keyname}.png`)
+  })
+}
+
+function populateFishCollection() {
   for (let i = 0; i < fishCount; i++) {
-    let randomKeyname = keyCollection[_.random(keyCollection.length-1)]
+    let randomKeyname = keyCollection[_.random(keyCollection.length - 1)]
     fish = game.add.sprite(_.random(width), _.random(height), `${randomKeyname}`)
     fish.scale.setTo(_.random(0.3, 0.5, true))
     game.physics.enable(fish, Phaser.Physics.ARCADE);
@@ -44,8 +64,7 @@ function create() {
   }
 }
 
-function update() {
-
+function updateCameraViaKeyboard() {
   if (cursors.up.isDown) {
     game.camera.y -= 4
   }
@@ -60,18 +79,9 @@ function update() {
   }
 }
 
-function render() {
-  // game.debug.cameraInfo(game.camera, 32, 32)
-  // game.debug.spriteInfo(fish, 32, 192)
-}
-
 // update acceleration every 2 secs
 setInterval(() => {
   fishCollection.forEach((fish) => {
     fish.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
   })
 }, 2000)
-
-function populateKeyCollection () {
-  keyCollection = ['fish001', 'fish002', 'fish003', 'fish004', 'fish005', 'fish006', 'fish007']
-}
