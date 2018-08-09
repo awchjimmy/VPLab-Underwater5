@@ -5,12 +5,19 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
   render: render
 });
 var cursors
-var tropicalfish1
+
+var fish
+var fishCount = 10
 var fishCollection = []
+var keyCollection = []
 
 function preload() {
   game.load.image('bg1', './assets/bg1.jpg')
-  game.load.image('tropicalfish', './assets/tropicalfish.png')
+
+  populateKeyCollection()
+  _.forEach(keyCollection, function (keyname) {
+    game.load.image(`${keyname}`, `./assets/${keyname}.png`)
+  })
 }
 
 function create() {
@@ -21,15 +28,16 @@ function create() {
 
 
 
-  for (let i = 0; i < 3; i++) {
-    tropicalfish1 = game.add.sprite(_.random(800), _.random(600), 'tropicalfish')
-    tropicalfish1.scale.setTo(_.random(0.2, 0.3, true))
-    game.physics.enable(tropicalfish1, Phaser.Physics.ARCADE);
-    tropicalfish1.body.allowRotation = false
-    tropicalfish1.body.velocity.set(20)
-    tropicalfish1.body.collideWorldBounds = true
+  for (let i = 0; i < fishCount; i++) {
+    let randomKeyname = keyCollection[_.random(keyCollection.length-1)]
+    fish = game.add.sprite(_.random(800), _.random(600), `${randomKeyname}`)
+    fish.scale.setTo(_.random(0.3, 0.5, true))
+    game.physics.enable(fish, Phaser.Physics.ARCADE);
+    fish.body.allowRotation = false
+    fish.body.velocity.set(20)
+    fish.body.collideWorldBounds = true
 
-    fishCollection.push(tropicalfish1)
+    fishCollection.push(fish)
   }
 }
 
@@ -50,8 +58,8 @@ function update() {
 }
 
 function render() {
-  game.debug.cameraInfo(game.camera, 32, 32)
-  game.debug.spriteInfo(tropicalfish1, 32, 192)
+  // game.debug.cameraInfo(game.camera, 32, 32)
+  // game.debug.spriteInfo(fish, 32, 192)
 }
 
 // update acceleration every 2 secs
@@ -60,3 +68,7 @@ setInterval(() => {
     fish.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
   })
 }, 2000)
+
+function populateKeyCollection () {
+  keyCollection = ['fish001', 'fish002', 'fish003', 'fish004', 'fish005', 'fish006', 'fish007']
+}
