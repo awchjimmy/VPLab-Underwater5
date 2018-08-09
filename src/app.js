@@ -1,18 +1,15 @@
 var width = 5000
 var height = 600
-
-var game = new Phaser.Game('100%', '100%', Phaser.AUTO, '', {
-  preload: preload,
-  create: create,
-  update: update,
-  render: render
-});
 var cursors
-
 var fish
 var fishCount = 50
 var fishCollection = []
 var keyCollection = []
+
+var game = new Phaser.Game('100%', '100%', Phaser.AUTO, '')
+game.state.add('Boot', { preload: preload, create: create, update: update, render: render }, true)
+game.state.add('Medium', mediumState)
+
 
 function preload() {
   game.load.image('bg1', './assets/bg1.jpg')
@@ -66,10 +63,12 @@ function populateFishCollection() {
 
 function updateCameraViaKeyboard() {
   if (cursors.up.isDown) {
-    game.camera.y -= 4
+    game.state.start('Boot')
   }
   else if (cursors.down.isDown) {
-    game.camera.y += 4
+    game.state.start('Medium')
+  }
+  if (cursors.down.isDown) {
   }
   if (cursors.left.isDown) {
     game.camera.x -= 4
