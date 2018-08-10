@@ -78,8 +78,8 @@ shallowState.prototype = {
 
   updateCameraViaKeyboard: function () {
     if (this.cursors.up.isDown) {
-      this.releaseIntervalCollection()
-      this.game.state.start('Shallow')
+      // this.releaseIntervalCollection()
+      // this.game.state.start('Shallow')
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
       this.game.state.start('Medium')
