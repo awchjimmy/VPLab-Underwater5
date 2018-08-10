@@ -19,6 +19,7 @@ deepState.prototype = {
   // funcs
   preload: function () {
     this.game.load.image('bg3', './assets/bg3.jpg')
+    this.game.load.image('ruler3', './assets/ruler3.png')
 
     // this.game.load.image('fish201', './assets/fish201.png')
     this.game.load.image('fish202', './assets/fish202.png')
@@ -39,6 +40,9 @@ deepState.prototype = {
     this.initCamera()
 
     this.game.add.image(0, 0, 'bg3')
+    let ruler = this.game.add.image(100, 100, 'ruler3')
+    ruler.scale.set(0.7)
+    ruler.fixedToCamera = true
 
     this.createFish()
     this.intervalCollection.push( setInterval(() => {this.createFish()}, 10000) )

@@ -19,6 +19,7 @@ shallowState.prototype = {
   // funcs
   preload: function () {
     this.game.load.image('bg1', './assets/bg1.jpg')
+    this.game.load.image('ruler1', './assets/ruler1.png')
 
     this.game.load.image('fish001', './assets/fish001.png')
     this.game.load.image('fish002', './assets/fish002.png')
@@ -37,6 +38,9 @@ shallowState.prototype = {
     this.initCamera()
 
     this.game.add.image(0, 0, 'bg1')
+    let ruler = this.game.add.image(100, 100, 'ruler1')
+    ruler.scale.set(0.7)
+    ruler.fixedToCamera = true
 
     // console.log(this.fishCollection)
     this.createFishCollection()

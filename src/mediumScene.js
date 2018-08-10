@@ -19,6 +19,7 @@ mediumState.prototype = {
   // funcs
   preload: function () {
     this.game.load.image('bg2', './assets/bg2.jpg')
+    this.game.load.image('ruler2', './assets/ruler2.png')
 
     this.game.load.image('fish101', './assets/fish101.png')
     this.game.load.image('fish102', './assets/fish102.png')
@@ -40,6 +41,9 @@ mediumState.prototype = {
     this.initCamera()
 
     this.game.add.image(0, 0, 'bg2')
+    let ruler = this.game.add.image(100, 100, 'ruler2')
+    ruler.scale.set(0.7)
+    ruler.fixedToCamera = true
 
     // console.log(this.fishCollection)
     this.createFishCollection()
