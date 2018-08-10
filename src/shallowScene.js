@@ -71,7 +71,7 @@ shallowState.prototype = {
 
   initCamera: function () {
     // // set bounds for camera
-    this.game.world.setBounds(0, 0, width, height)
+    this.game.world.setBounds(0, 0, this.width, this.height)
     // // set keyboard for camera control
     this.cursors = this.game.input.keyboard.createCursorKeys()
   },
