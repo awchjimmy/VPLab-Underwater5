@@ -4,32 +4,31 @@
  * Praise the Lord.
  */
 
-var mediumState = function (game) { }
+var deepState = function (game) { }
 
-mediumState.prototype = {
+deepState.prototype = {
   // vars
   width: 5000,
   height: 600,
   cursors: null,
-  fishCount: 30,
+  fishCount: 5,
   fishCollection: [],
-  fishKeyCollction: ['fish101', 'fish102', 'fish103', 'fish104', 'fish105', 'fish106', 'fish107', 'fish108', 'fish109', 'fish110'],
+  fishKeyCollction: ['fish201', 'fish202', 'fish203', 'fish204', 'fish205', 'fish206', 'fish207', 'fish208', 'fish209'],
   intervalCollection: [],
 
   // funcs
   preload: function () {
-    this.game.load.image('bg2', './assets/bg2.jpg')
+    this.game.load.image('bg3', './assets/bg3.jpg')
 
-    this.game.load.image('fish101', './assets/fish101.png')
-    this.game.load.image('fish102', './assets/fish102.png')
-    this.game.load.image('fish103', './assets/fish103.png')
-    this.game.load.image('fish104', './assets/fish104.png')
-    this.game.load.image('fish105', './assets/fish105.png')
-    this.game.load.image('fish106', './assets/fish106.png')
-    this.game.load.image('fish107', './assets/fish107.png')
-    this.game.load.image('fish108', './assets/fish108.png')
-    this.game.load.image('fish109', './assets/fish109.png')
-    this.game.load.image('fish110', './assets/fish110.png')
+    this.game.load.image('fish201', './assets/fish201.png')
+    this.game.load.image('fish202', './assets/fish202.png')
+    this.game.load.image('fish203', './assets/fish203.png')
+    this.game.load.image('fish204', './assets/fish204.png')
+    this.game.load.image('fish205', './assets/fish205.png')
+    this.game.load.image('fish206', './assets/fish206.png')
+    this.game.load.image('fish207', './assets/fish207.png')
+    this.game.load.image('fish208', './assets/fish208.png')
+    this.game.load.image('fish209', './assets/fish209.png')
   },
 
   create: function () {
@@ -39,7 +38,7 @@ mediumState.prototype = {
     // camera
     this.initCamera()
 
-    this.game.add.image(0, 0, 'bg2')
+    this.game.add.image(0, 0, 'bg3')
 
     // console.log(this.fishCollection)
     this.createFishCollection()
@@ -63,7 +62,7 @@ mediumState.prototype = {
       whale.body.collideWorldBounds = true
       // console.log(whale)
 
-      whale.scale.set(_.random(0.4, 0.6, true))
+      whale.scale.set(_.random(0.6, 0.8, true))
       whale.body.velocity.set(_.random(20))
       // random acceleration
       this.intervalCollection.push( setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000) )
@@ -82,7 +81,7 @@ mediumState.prototype = {
   updateCameraViaKeyboard: function () {
     if (this.cursors.up.isDown) {
       this.releaseIntervalCollection()
-      this.game.state.start('Shallow')
+      this.game.state.start('Medium')
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
       this.game.state.start('Deep')
