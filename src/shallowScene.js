@@ -14,6 +14,7 @@ shallowState.prototype = {
   fishCount: 50,
   fishCollection: [],
   fishKeyCollction: ['fish001', 'fish002', 'fish003', 'fish004', 'fish005', 'fish006', 'fish007'],
+  intervalCollection: [],
 
   // funcs
   preload: function () {
@@ -56,13 +57,13 @@ shallowState.prototype = {
       let rndKeyname = this.fishKeyCollction[_.random(this.fishKeyCollction.length - 1)]
       let whale = this.game.add.sprite(x, y, rndKeyname)
       this.game.physics.enable(whale, Phaser.Physics.ARCADE) // after enable physics, there is sprite.body, kinda cool
+      whale.body.collideWorldBounds = true
       // console.log(whale)
 
       whale.scale.set(_.random(0.3, 0.5, true))
       whale.body.velocity.set(_.random(20))
       // random acceleration
-      setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000)
-      whale.body.collideWorldBounds = true
+      this.intervalCollection.push( setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000) )
 
       this.fishCollection.push(whale)
     }
@@ -77,8 +78,10 @@ shallowState.prototype = {
 
   updateCameraViaKeyboard: function () {
     if (this.cursors.up.isDown) {
+      this.releaseIntervalCollection()
       this.game.state.start('Shallow')
     } else if (this.cursors.down.isDown) {
+      this.releaseIntervalCollection()
       this.game.state.start('Medium')
     }
     if (this.cursors.left.isDown) {
@@ -87,4 +90,10 @@ shallowState.prototype = {
       this.game.camera.x += 4
     }
   },
+
+  releaseIntervalCollection: function () {
+    this.intervalCollection.forEach(intervalId => {
+      clearInterval(intervalId)
+    })
+  }
 }
