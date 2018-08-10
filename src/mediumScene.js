@@ -10,9 +10,11 @@ mediumState.prototype = {
   // vars
   width: 5000,
   height: 600,
-  fishCount: 10,
+  cursors: null,
+  fishCount: 20,
   fishCollection: [],
-  fishKeyCollction: ['fish101', 'fish102', 'fish103'],
+  fishKeyCollction: ['fish101', 'fish102', 'fish103', 'fish104', 'fish105', 'fish106', 'fish107', 'fish108', 'fish109', 'fish110'],
+  intervalCollection: [],
 
   // funcs
   preload: function () {
@@ -21,16 +23,23 @@ mediumState.prototype = {
     this.game.load.image('fish101', './assets/fish101.png')
     this.game.load.image('fish102', './assets/fish102.png')
     this.game.load.image('fish103', './assets/fish103.png')
+    this.game.load.image('fish104', './assets/fish104.png')
+    this.game.load.image('fish105', './assets/fish105.png')
+    this.game.load.image('fish106', './assets/fish106.png')
+    this.game.load.image('fish107', './assets/fish107.png')
+    this.game.load.image('fish108', './assets/fish108.png')
+    this.game.load.image('fish109', './assets/fish109.png')
+    this.game.load.image('fish110', './assets/fish110.png')
   },
 
   create: function () {
     // game engine settings
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
+
+    // camera
     this.initCamera()
 
-
     this.game.add.image(0, 0, 'bg2')
-
 
     // console.log(this.fishCollection)
     this.createFishCollection()
@@ -41,7 +50,7 @@ mediumState.prototype = {
   },
 
   render: function () {
-
+    this.game.debug.cameraInfo(this.game.camera, 32, 32)
   },
 
   createFishCollection: function () {
@@ -51,10 +60,13 @@ mediumState.prototype = {
       let rndKeyname = this.fishKeyCollction[_.random(this.fishKeyCollction.length - 1)]
       let whale = this.game.add.sprite(x, y, rndKeyname)
       this.game.physics.enable(whale, Phaser.Physics.ARCADE) // after enable physics, there is sprite.body, kinda cool
+      whale.body.collideWorldBounds = true
       // console.log(whale)
 
       whale.scale.set(_.random(0.3, 0.5, true))
-      whale.body.velocity.set(100, _.random(-15, 15))
+      whale.body.velocity.set(_.random(20))
+      // random acceleration
+      this.intervalCollection.push( setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000) )
 
       this.fishCollection.push(whale)
     }
@@ -69,8 +81,10 @@ mediumState.prototype = {
 
   updateCameraViaKeyboard: function () {
     if (this.cursors.up.isDown) {
+      this.releaseIntervalCollection()
       this.game.state.start('Shallow')
     } else if (this.cursors.down.isDown) {
+      this.releaseIntervalCollection()
       this.game.state.start('Medium')
     }
     if (this.cursors.left.isDown) {
@@ -78,6 +92,11 @@ mediumState.prototype = {
     } else if (this.cursors.right.isDown) {
       this.game.camera.x += 4
     }
-  }
+  },
 
+  releaseIntervalCollection: function () {
+    this.intervalCollection.forEach(intervalId => {
+      clearInterval(intervalId)
+    })
+  }
 }
