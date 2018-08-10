@@ -11,7 +11,7 @@ mediumState.prototype = {
   width: 5000,
   height: 600,
   cursors: null,
-  fishCount: 20,
+  fishCount: 30,
   fishCollection: [],
   fishKeyCollction: ['fish101', 'fish102', 'fish103', 'fish104', 'fish105', 'fish106', 'fish107', 'fish108', 'fish109', 'fish110'],
   intervalCollection: [],
@@ -63,7 +63,7 @@ mediumState.prototype = {
       whale.body.collideWorldBounds = true
       // console.log(whale)
 
-      whale.scale.set(_.random(0.3, 0.5, true))
+      whale.scale.set(_.random(0.4, 0.6, true))
       whale.body.velocity.set(_.random(20))
       // random acceleration
       this.intervalCollection.push( setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000) )
