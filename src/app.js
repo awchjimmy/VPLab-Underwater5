@@ -7,8 +7,10 @@ var fishCollection = []
 var keyCollection = []
 
 var game = new Phaser.Game('100%', '100%', Phaser.AUTO, '')
-game.state.add('Boot', { preload: preload, create: create, update: update, render: render }, true)
+// game.state.add('Boot', { preload: preload, create: create, update: update, render: render }, true)
+game.state.add('Shallow', shallowState)
 game.state.add('Medium', mediumState)
+game.state.start('Shallow')
 
 
 function preload() {
@@ -61,22 +63,22 @@ function populateFishCollection() {
   }
 }
 
-function updateCameraViaKeyboard() {
-  if (cursors.up.isDown) {
-    game.state.start('Boot')
-  }
-  else if (cursors.down.isDown) {
-    game.state.start('Medium')
-  }
-  if (cursors.down.isDown) {
-  }
-  if (cursors.left.isDown) {
-    game.camera.x -= 4
-  }
-  else if (cursors.right.isDown) {
-    game.camera.x += 4
-  }
-}
+// function updateCameraViaKeyboard() {
+//   if (cursors.up.isDown) {
+//     game.state.start('Boot')
+//   }
+//   else if (cursors.down.isDown) {
+//     game.state.start('Medium')
+//   }
+//   if (cursors.down.isDown) {
+//   }
+//   if (cursors.left.isDown) {
+//     game.camera.x -= 4
+//   }
+//   else if (cursors.right.isDown) {
+//     game.camera.x += 4
+//   }
+// }
 
 // update acceleration every 2 secs
 // setInterval(() => {
