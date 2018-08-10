@@ -79,8 +79,8 @@ function updateCameraViaKeyboard() {
 }
 
 // update acceleration every 2 secs
-setInterval(() => {
-  fishCollection.forEach((fish) => {
-    fish.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
-  })
-}, 2000)
+// setInterval(() => {
+//   fishCollection.forEach((fish) => {
+//     fish.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
+//   })
+// }, 2000)
