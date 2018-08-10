@@ -11,7 +11,7 @@ shallowState.prototype = {
   width: 5000,
   height: 600,
   cursors: null,
-  fishCount: 30,
+  fishCount: 50,
   fishCollection: [],
   fishKeyCollction: ['fish001', 'fish002', 'fish003', 'fish004', 'fish005', 'fish006', 'fish007'],
 
@@ -60,7 +60,8 @@ shallowState.prototype = {
 
       whale.scale.set(_.random(0.3, 0.5, true))
       whale.body.velocity.set(_.random(20))
-      whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20))
+      // random acceleration
+      setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000)
       whale.body.collideWorldBounds = true
 
       this.fishCollection.push(whale)
