@@ -6,7 +6,7 @@ var mediumState = {
 }
 
 function preload() {
-  game.load.image('bg2', './assets/bg5.jpg')
+  game.load.image('bg2', './assets/bg2.jpg')
 }
 function create() {
   game.add.image(0, 0, 'bg2')
