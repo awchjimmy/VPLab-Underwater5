@@ -15,6 +15,7 @@ deepState.prototype = {
   fishCollection: [],
   fishKeyCollction: ['fish202', 'fish203', 'fish204', 'fish205', 'fish206', 'fish207', 'fish208', 'fish209'],
   intervalCollection: [],
+  bgm: null,
 
   // funcs
   preload: function () {
@@ -30,6 +31,8 @@ deepState.prototype = {
     this.game.load.image('fish207', './assets/fish207.png')
     this.game.load.image('fish208', './assets/fish208.png')
     this.game.load.image('fish209', './assets/fish209.png')
+
+    this.game.load.audio('bgm3', './assets/bgm3.mp3', true)
   },
 
   create: function () {
@@ -38,6 +41,10 @@ deepState.prototype = {
 
     // camera
     this.initCamera()
+
+    // bgm
+    this.bgm = this.game.add.audio('bgm3', 1, true)
+    this.bgm.play()
 
     this.game.add.image(0, 0, 'bg3')
     let ruler = this.game.add.image(100, 100, 'ruler3')
@@ -100,6 +107,7 @@ deepState.prototype = {
   updateCameraViaKeyboard: function () {
     if (this.cursors.up.isDown) {
       this.releaseIntervalCollection()
+      this.bgm.stop()
       this.game.state.start('Medium')
     } else if (this.cursors.down.isDown) {
       // this.releaseIntervalCollection()
