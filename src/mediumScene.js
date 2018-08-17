@@ -15,6 +15,7 @@ mediumState.prototype = {
   fishCollection: [],
   fishKeyCollction: ['fish101', 'fish102', 'fish103', 'fish104', 'fish105', 'fish106', 'fish107', 'fish108', 'fish109', 'fish110'],
   intervalCollection: [],
+  bgm: null,
 
   // funcs
   preload: function () {
@@ -31,6 +32,8 @@ mediumState.prototype = {
     this.game.load.image('fish108', './assets/fish108.png')
     this.game.load.image('fish109', './assets/fish109.png')
     this.game.load.image('fish110', './assets/fish110.png')
+
+    this.game.load.audio('bgm2', './assets/bgm2.mp3', true)
   },
 
   create: function () {
@@ -39,6 +42,10 @@ mediumState.prototype = {
 
     // camera
     this.initCamera()
+
+    // bgm
+    this.bgm = this.game.add.audio('bgm2', 1, true)
+    this.bgm.play()
 
     this.game.add.image(0, 0, 'bg2')
     let ruler = this.game.add.image(100, 100, 'ruler2')
@@ -86,9 +93,11 @@ mediumState.prototype = {
   updateCameraViaKeyboard: function () {
     if (this.cursors.up.isDown) {
       this.releaseIntervalCollection()
+      this.bgm.stop()
       this.game.state.start('Shallow')
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
+      this.bgm.stop()
       this.game.state.start('Deep')
     }
     if (this.cursors.left.isDown) {
