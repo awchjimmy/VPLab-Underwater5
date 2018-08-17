@@ -93,7 +93,7 @@ shallowState.prototype = {
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
       this.bgm.stop()
-      this.game.state.start('Medium')
+      this.game.state.start('Subdiving')
     }
     if (this.cursors.left.isDown) {
       this.game.camera.x -= 4
