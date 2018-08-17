@@ -28,6 +28,8 @@ shallowState.prototype = {
     this.game.load.image('fish005', './assets/fish005.png')
     this.game.load.image('fish006', './assets/fish006.png')
     this.game.load.image('fish007', './assets/fish007.png')
+
+    this.game.load.audio('bgm1', './assets/bgm1.mp3', true)
   },
 
   create: function () {
@@ -36,6 +38,10 @@ shallowState.prototype = {
 
     // camera
     this.initCamera()
+
+    // bgm
+    this.bgm = this.game.add.audio('bgm1', 1, true)
+    this.bgm.play()
 
     this.game.add.image(0, 0, 'bg1')
     let ruler = this.game.add.image(100, 100, 'ruler1')
@@ -86,6 +92,7 @@ shallowState.prototype = {
       // this.game.state.start('Shallow')
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
+      this.bgm.stop()
       this.game.state.start('Medium')
     }
     if (this.cursors.left.isDown) {
