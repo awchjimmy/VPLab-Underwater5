@@ -94,11 +94,13 @@ mediumState.prototype = {
     if (this.cursors.up.isDown) {
       this.releaseIntervalCollection()
       this.bgm.stop()
-      this.game.state.start('Shallow')
+      this.game.state.states['Subdiving'].next = 'Shallow'
+      this.game.state.start('Subdiving')
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
       this.bgm.stop()
-      this.game.state.start('Deep')
+      this.game.state.states['Subdiving'].next = 'Deep'
+      this.game.state.start('Subdiving')
     }
     if (this.cursors.left.isDown) {
       this.game.camera.x -= 4

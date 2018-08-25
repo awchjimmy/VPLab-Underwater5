@@ -27,7 +27,7 @@ subdivingState.prototype = {
     let anim = sub.animations.add('diving')
     anim.onComplete.add(function(){
       this.bgm.stop()
-      this.game.state.start('Medium')
+      this.game.state.start( this.game.state.states['Subdiving'].next )
     }, this)
     anim.play(10, false)
   },

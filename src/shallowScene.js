@@ -93,6 +93,7 @@ shallowState.prototype = {
     } else if (this.cursors.down.isDown) {
       this.releaseIntervalCollection()
       this.bgm.stop()
+      this.game.state.states['Subdiving'].next = 'Medium'
       this.game.state.start('Subdiving')
     }
     if (this.cursors.left.isDown) {

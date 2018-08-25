@@ -108,7 +108,8 @@ deepState.prototype = {
     if (this.cursors.up.isDown) {
       this.releaseIntervalCollection()
       this.bgm.stop()
-      this.game.state.start('Medium')
+      this.game.state.states['Subdiving'].next = 'Medium'
+      this.game.state.start('Subdiving')
     } else if (this.cursors.down.isDown) {
       // this.releaseIntervalCollection()
       // this.game.state.start('Deep')
