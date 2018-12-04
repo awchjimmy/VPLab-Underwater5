@@ -74,7 +74,7 @@ mediumState.prototype = {
       whale.body.collideWorldBounds = true
       // console.log(whale)
 
-      whale.scale.set(_.random(0.4, 0.6, true))
+      whale.scale.set(_.random(0.6, 0.7, true))
       whale.body.velocity.set(_.random(20))
       // random acceleration
       this.intervalCollection.push( setInterval(() => whale.body.acceleration.set(_.random(-20, 20), _.random(-20, 20)), 2000) )
